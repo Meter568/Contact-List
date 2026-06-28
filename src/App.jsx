@@ -1,7 +1,9 @@
 import { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+
 import ContactList from './components/ContactList/ContactList';
 import ContactForm from './components/ContactForm/ContactForm';
+
 import styles from './App.module.css';
 
 class App extends Component {

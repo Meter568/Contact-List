@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 import styles from './ContactForm.module.css';
 
 class ContactForm extends Component {
@@ -62,6 +63,7 @@ class ContactForm extends Component {
                         placeholder="First name"
                         value={this.state.firstName}
                         onChange={this.onInputChange}
+                        required
                     />
                     <button
                         className={styles['btn-clear']}
@@ -77,6 +79,7 @@ class ContactForm extends Component {
                         placeholder="Last name"
                         value={this.state.lastName}
                         onChange={this.onInputChange}
+                        required
                     />
                     <button
                         className={styles['btn-clear']}

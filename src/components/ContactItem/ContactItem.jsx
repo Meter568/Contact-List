@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 import styles from './ContactItem.module.css';
 
 class ContactItem extends Component {
