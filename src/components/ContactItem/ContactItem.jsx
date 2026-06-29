@@ -3,8 +3,7 @@ import { Component } from 'react';
 import styles from './ContactItem.module.css';
 
 class ContactItem extends Component {
-    onContactDelete = (event) => {
-        event.stopPropagation();
+    onContactDelete = () => {
         this.props.onDelete(this.props.contact.id);
     };
     render() {

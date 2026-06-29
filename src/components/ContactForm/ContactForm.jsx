@@ -7,22 +7,29 @@ class ContactForm extends Component {
         ...this.props.currentContact,
     };
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.currentContact.id !== prevState.id) {
+            return {
+                ...nextProps.currentContact,
+            };
+        }
+        return null;
+    }
+
     onInputChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
         });
     };
 
-    onClearAllInputs = () => {
-        event.preventDefault();
-        event.stopPropagation();
+    clearState = () => {
         this.setState({
+            id: '',
             firstName: '',
             lastName: '',
             email: '',
             phone: '',
         });
-        this.props.clearContact();
     };
 
     onClearInput = (event) => {
@@ -34,20 +41,31 @@ class ContactForm extends Component {
         });
     };
 
-    onFormSave = (e) => {
-        e.preventDefault();
+    onFormNew = (event) => {
+        event.preventDefault();
+        if (!this.state.id) {
+            this.clearState();
+        } else {
+            this.props.clearContact();
+        }
+    };
+
+    onFormSave = (event) => {
+        event.preventDefault();
         this.props.onSave({
             ...this.state,
         });
         if (!this.state.id) {
-            this.onClearAllInputs();
+            this.clearState();
         }
     };
 
-    onContactDelete = () => {
+
+    onContactDelete = (event) => {
         event.preventDefault();
         event.stopPropagation();
         this.props.onDelete(this.props.currentContact.id);
+        this.props.clearContact();
     };
 
     render() {
@@ -121,7 +139,7 @@ class ContactForm extends Component {
                 <div className={styles.btns}>
                     <button
                         className={styles.btn}
-                        onClick={this.onClearAllInputs}
+                        onClick={this.onFormNew}
                     >
                         New
                     </button>

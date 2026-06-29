@@ -7,18 +7,17 @@ import ContactForm from './components/ContactForm/ContactForm';
 import styles from './App.module.css';
 
 class App extends Component {
-    state = {
-        contacts: [],
-        currentContact: {
-            firstName: '',
-            lastName: '',
-            email: '',
-            phone: '',
-        },
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            contacts: [],
+            currentContact: this.createEmptyContact(),
+        };
+    }
 
     createEmptyContact = () => {
         return {
+            id: '',
             firstName: '',
             lastName: '',
             email: '',
@@ -106,11 +105,9 @@ class App extends Component {
                         onSelect={this.selectContact}
                     />
                     <ContactForm
-                        key={this.state.currentContact.id}
                         currentContact={this.state.currentContact}
                         onSave={this.saveContact}
                         onDelete={this.deleteContact}
-                        onNew={this.createEmptyContact}
                         clearContact={this.clearContact}
                     />
                 </div>
